@@ -4,6 +4,7 @@ flutter_app을 기반으로 firebase를 연결해서 구현중인
 wbc_detector앱 입니다.
 
 # 로그인
+cloud_firestore를 DB로 이용해 구현중 
 
 # 버전
 firebase_core 1.13.1
