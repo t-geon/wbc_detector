@@ -5,10 +5,10 @@ import 'package:wbc_detector/pages/list/list_detail_page.dart';
 class PatientCard extends StatelessWidget {
   const PatientCard({
     Key? key,
-    required this.patient,
+    required this.details,
   }) : super(key: key);
 
-  final Patient patient;
+  final PatientDetail details;
 
   @override
   Widget build(BuildContext context) {
@@ -32,23 +32,23 @@ class PatientCard extends StatelessWidget {
                 leading: CircleAvatar(
                   //환자 사진
                   radius: 25,
-                  backgroundImage: NetworkImage(patient.image),
+                  backgroundImage: NetworkImage(details.image),
                 ),
                 title: Text(
-                  patient.name, //환자 이름
+                  details.name, //환자 이름
                   style: TextStyle(
                     fontWeight: FontWeight.w600,
                     fontSize: 16,
                   ),
                 ),
-                subtitle: Text(patient.content), //환자 문구(설명)
+                subtitle: Text(details.content), //환자 문구(설명)
                 contentPadding: const EdgeInsets.all(0),
               ),
             ),
             Column(
               children: [
                 Text(
-                  patient.time, //환자 검사 시간
+                  details.time, //환자 검사 시간
                   style: TextStyle(color: Color(0xFFa5a5a5), fontSize: 12),
                 ),
                 SizedBox(

@@ -1,75 +1,41 @@
-class Patient {
-  //환자 구성요소
-  final String image;
-  final String name;
-  final String content;
-  final String time;
+import 'package:cloud_firestore/cloud_firestore.dart';
 
-  Patient(
-      //환자 생성자
-      {required this.image,
-      required this.name,
-      required this.content,
-      required this.time});
+class PatientDetail {
+  //환자 구성요소 late안하면 초기화 에러남
+  late String id;
+  late String _image;
+  late String _name;
+  late String _content;
+  late String _time;
+
+  PatientDetail(
+      this.id, this._image, this._name, this._content, this._time); //생성자
+
+  String get image => _image;
+  String get name => _name;
+  String get content => _content;
+  String get time => _time;
+
+  PatientDetail.fromMap(dynamic obj) {
+    //동적 객체 가져와서 Patient로 변환하는 생성자
+    this.id = (obj as QueryDocumentSnapshot).id; //obj['id'];
+    this._image = obj['image'];
+    this._name = obj['name'];
+    this._content = obj['content'];
+    this._time = obj['time'];
+  }
+
+  Map<String, dynamic> toMap() {
+    //patient객체를 map으로 변환
+    var map = Map<String, dynamic>();
+    if (id != null) {
+      map['id'] = id;
+    }
+    map['image'] = _image;
+    map['name'] = _name;
+    map['content'] = _content;
+    map['time'] = _time;
+
+    return map;
+  }
 }
-
-final String _urlPrefix =
-    "https://raw.githubusercontent.com/flutter-coder/ui_images/master/messenger";
-
-//환자 목록인데 나중에 데이터 베이스로 연결해야할 듯
-List<Patient> patients = [
-  Patient(
-    image: "${_urlPrefix}_man_1.jpg",
-    name: "hong",
-    content: "검사 내용",
-    time: "2022/01/01",
-  ),
-  Patient(
-    image: "${_urlPrefix}_woman_1.jpg",
-    name: "정도전",
-    content: "검사 내용",
-    time: "2022/01/02",
-  ),
-  Patient(
-    image: "${_urlPrefix}_man_1.jpg",
-    name: "홍길동",
-    content: "검사 내용",
-    time: "2022/01/02",
-  ),
-  Patient(
-    image: "${_urlPrefix}_man_1.jpg",
-    name: "홍길동",
-    content: "검사 내용",
-    time: "2022/01/03",
-  ),
-  Patient(
-    image: "${_urlPrefix}_man_1.jpg",
-    name: "홍길동",
-    content: "검사 내용",
-    time: "2022/01/04",
-  ),
-  Patient(
-    image: "${_urlPrefix}_man_1.jpg",
-    name: "홍길동",
-    content: "검사 내용",
-    time: "2022/01/05",
-  ),
-  Patient(
-    image: "${_urlPrefix}_man_1.jpg",
-    name: "홍길동",
-    content: "검사 내용",
-    time: "2022/01/06",
-  ),
-  Patient(
-    image: "${_urlPrefix}_man_1.jpg",
-    name: "홍길동",
-    content: "검사 내용",
-    time: "2022/01/07",
-  ),
-  Patient(
-    image: "${_urlPrefix}_man_1.jpg",
-    name: "홍길동",
-    content: "검사 내용",
-    time: "2022/01/08",
-  ),
-];
