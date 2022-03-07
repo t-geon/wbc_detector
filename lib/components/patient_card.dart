@@ -35,7 +35,7 @@ class PatientCard extends StatelessWidget {
                   backgroundImage: NetworkImage(patient.image),
                 ),
                 title: Text(
-                  patient.title, //환자 이름
+                  patient.name, //환자 이름
                   style: TextStyle(
                     fontWeight: FontWeight.w600,
                     fontSize: 16,
@@ -54,19 +54,6 @@ class PatientCard extends StatelessWidget {
                 SizedBox(
                   height: 5,
                 ),
-                if (patient.count != "0") // 1
-                  Container(
-                    //채팅에서 메세지 개수 뜨는건데 없어도 될 듯
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
-                        color: Color(0xFFde6344)),
-                    child: Text(
-                      patient.count,
-                      style: TextStyle(color: Colors.white, fontSize: 12),
-                    ),
-                  )
               ],
             ),
           ],

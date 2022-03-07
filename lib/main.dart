@@ -1,3 +1,4 @@
+/*
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:wbc_detector/route.dart';
@@ -20,13 +21,22 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+*/
 
-//import 'package:firebase_core/firebase_core.dart';
-//import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
+import 'package:wbc_detector/pages/example_page.dart';
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  runApp(MyApp());
+}
 
 /*void main() {
   runApp(MyApp());
-}
+}*/
 
 Future testData() async {
   await Firebase.initializeApp();
@@ -47,11 +57,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     testData();
     return MaterialApp(
-      title: 'Events',
+      title: 'PatientDetail',
       theme: ThemeData(
         primarySwatch: Colors.orange,
       ), //테마 설정
-      home: Scaffold(),
+      home: PatientScreen(),
     );
   }
-}*/
+}

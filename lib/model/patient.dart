@@ -1,18 +1,16 @@
 class Patient {
   //환자 구성요소
   final String image;
-  final String title;
+  final String name;
   final String content;
   final String time;
-  final String count;
 
   Patient(
       //환자 생성자
       {required this.image,
-      required this.title,
+      required this.name,
       required this.content,
-      required this.time,
-      required this.count});
+      required this.time});
 }
 
 final String _urlPrefix =
@@ -22,65 +20,56 @@ final String _urlPrefix =
 List<Patient> patients = [
   Patient(
     image: "${_urlPrefix}_man_1.jpg",
-    title: "hong",
+    name: "hong",
     content: "검사 내용",
     time: "2022/01/01",
-    count: "0",
   ),
   Patient(
     image: "${_urlPrefix}_woman_1.jpg",
-    title: "정도전",
+    name: "정도전",
     content: "검사 내용",
     time: "2022/01/02",
-    count: "0",
   ),
   Patient(
     image: "${_urlPrefix}_man_1.jpg",
-    title: "홍길동",
+    name: "홍길동",
     content: "검사 내용",
     time: "2022/01/02",
-    count: "0",
   ),
   Patient(
     image: "${_urlPrefix}_man_1.jpg",
-    title: "홍길동",
+    name: "홍길동",
     content: "검사 내용",
     time: "2022/01/03",
-    count: "0",
   ),
   Patient(
     image: "${_urlPrefix}_man_1.jpg",
-    title: "홍길동",
+    name: "홍길동",
     content: "검사 내용",
     time: "2022/01/04",
-    count: "0",
   ),
   Patient(
     image: "${_urlPrefix}_man_1.jpg",
-    title: "홍길동",
+    name: "홍길동",
     content: "검사 내용",
     time: "2022/01/05",
-    count: "0",
   ),
   Patient(
     image: "${_urlPrefix}_man_1.jpg",
-    title: "홍길동",
+    name: "홍길동",
     content: "검사 내용",
     time: "2022/01/06",
-    count: "0",
   ),
   Patient(
     image: "${_urlPrefix}_man_1.jpg",
-    title: "홍길동",
+    name: "홍길동",
     content: "검사 내용",
     time: "2022/01/07",
-    count: "0",
   ),
   Patient(
     image: "${_urlPrefix}_man_1.jpg",
-    title: "홍길동",
+    name: "홍길동",
     content: "검사 내용",
     time: "2022/01/08",
-    count: "0",
   ),
 ];
