@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:wbc_detector/constants.dart';
+import 'package:wbc_detector/pages/login/loading_page.dart';
 import 'login/login_page.dart';
 
 class SplashPage extends StatelessWidget {
@@ -39,7 +40,8 @@ class SplashPage extends StatelessWidget {
                 ),
                 onPressed: () {
                   Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => LoginPage()));
+                      MaterialPageRoute(builder: (context) => LoadingPage()));
+                  //MaterialPageRoute(builder: (context) => LoginPage()));
                   //_completeSplash(context, LoginPage());
                 },
               ),
