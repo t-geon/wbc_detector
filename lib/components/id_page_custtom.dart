@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:wbc_detector/model/text_menu.dart';
+import 'package:wbc_detector/pages/login/login_page.dart';
+import 'package:wbc_detector/share/authentication.dart';
 import '../../components/text_menu_card.dart';
 
 //setting화면의 구성을 만드는 곳
 class IdPageCusttom extends StatelessWidget {
+  final Authentication auth = new Authentication();
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -20,6 +24,7 @@ class IdPageCusttom extends StatelessWidget {
                 press: () {
                   //text_menu 누르면 path가 /인경우에는 팝업 띄운다.
                   if (idMenuList[index].path == "/") {
+                    //회원탈퇴 누른경우
                     showDialog(
                         context: context,
                         barrierDismissible: false, //바깥 터치 불가능
@@ -46,6 +51,12 @@ class IdPageCusttom extends StatelessWidget {
                             ],
                           );
                         });
+                  } else if (idMenuList[index].path == "/login") {
+                    //로그아웃 누른 경우
+                    auth.signOut().then((result) {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => LoginPage()));
+                    });
                   } else {
                     //경로가 정해진 경우 해당 경로로 이동
                     Navigator.pushNamed(context, "${idMenuList[index].path}");
