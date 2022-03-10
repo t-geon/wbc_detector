@@ -112,8 +112,7 @@ class _SignUpPageState extends State<SignUpPage> {
             if (_formKey.currentState!.validate()) {
               _userId = (await auth.signUp(txtId.text, txtPassword.text))!;
               print('Sign up for user $_userId');
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => LoginPage()));
+              Navigator.pop(context);
             }
           },
           child: Center(
@@ -170,8 +169,7 @@ class _SignUpPageState extends State<SignUpPage> {
                   //default_button.dart에 정의한 함수 이용해 취소 버튼 생성
                   text: "취소",
                   press: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => LoginPage()));
+                    Navigator.pop(context);
                   },
                 ),
               ],
