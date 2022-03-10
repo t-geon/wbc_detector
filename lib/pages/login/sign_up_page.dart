@@ -127,6 +127,30 @@ class _SignUpPageState extends State<SignUpPage> {
         ));
   }
 
+  Widget checkPassword(){
+    return Padding(
+      padding: EdgeInsets.only(top:20),
+      child: TextFormField(
+        key: ValueKey(2),
+        decoration: InputDecoration(
+          hintText: "비밀번호를 입력하세요",
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.all(Radius.circular(20)),
+            borderSide: BorderSide(color: Colors.blue),
+          ),
+        ),
+        validator: (value) {
+          if (value!.isEmpty || value != _userPassword) {
+            return 'Password is not same.';
+          }
+          else{
+            return null;
+          }
+        },
+      )
+    );
+  }
+
   //회원가입 버튼
   Widget signupButton() {
     return Padding(
@@ -139,10 +163,11 @@ class _SignUpPageState extends State<SignUpPage> {
             padding: EdgeInsets.all(16),
           ),
           onPressed: () async {
-            _tryValidation();
-            _userId = (await _auth.signUp(_userId, _userPassword))!;
-            print("Sign up for user $_userId");
-            Navigator.pop(context);
+            if (_formKey.currentState!.validate()) {
+              _userId = (await _auth.signUp(_userId, _userPassword))!;
+              print("Sign up for user $_userId");
+              Navigator.pop(context);
+            }
           },
           child: Center(
             child: Text(
@@ -193,21 +218,21 @@ class _SignUpPageState extends State<SignUpPage> {
                   // validator를 따로 코딩해줘야 할 듯 (구현하려면)
                   if (_idFormKey.currentState!.validate()) {
                     showDialog(
-                      context: context,
-                      barrierDismissible: false,
-                      builder: (BuildContext ctx) {
-                        return AlertDialog(
-                          content: Text('사용가능한 아이디입니다.'),
-                          actions: [
-                            ElevatedButton(
-                              onPressed: () {
-                                Navigator.pop(context);
-                              },
-                              child: Text('확인'),
-                            )
-                          ],
-                        );
-                    });
+                        context: context,
+                        barrierDismissible: false,
+                        builder: (BuildContext ctx) {
+                          return AlertDialog(
+                            content: Text('사용가능한 아이디입니다.'),
+                            actions: [
+                              ElevatedButton(
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                },
+                                child: Text('확인'),
+                              )
+                            ],
+                          );
+                        });
                   }
                 },
                 child: Center(
@@ -217,10 +242,14 @@ class _SignUpPageState extends State<SignUpPage> {
               Form(
                 key: _formKey,
                 child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    SizedBox(height: l_gap),
                     Text('비밀번호'),
                     passwordInput(),
-
+                    SizedBox(height: l_gap),
+                    Text('비밀 번호를 다시 입력하세요.'),
+                    checkPassword(),
                     Padding(padding: EdgeInsets.symmetric(vertical: 10)),
                     Text('- 개인정보 입력'),
                     Padding(padding: EdgeInsets.symmetric(vertical: 10)),
@@ -238,6 +267,9 @@ class _SignUpPageState extends State<SignUpPage> {
                         if (value!.isEmpty || value.length > 9) {
                           return 'Please enter a valid name.';
                         }
+                        else {
+                          return null;
+                        }
                       },
                     ),
                     SizedBox(height: l_gap),
@@ -254,6 +286,9 @@ class _SignUpPageState extends State<SignUpPage> {
                       validator: (value) {
                         if (value!.isEmpty || value.length != 11) {
                           return 'Please enter a valid phone number.';
+                        }
+                        else{
+                          return null;
                         }
                       },
                     ),
