@@ -39,6 +39,7 @@ class HomePage extends StatelessWidget {
                 padding: EdgeInsets.all(16),
               ),
               onPressed: () async {
+                //aedat4.0파일 선택 -> file 서버 전달 -> 모델 동작 -> 결과 앱으로 가져오기
                 final result = await FilePicker.platform.pickFiles();
                 //final result = await FilePicker.platform.pickFiles(allowMultiple: true);
                 //위 코드는 파일 여러개 선택
