@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:wbc_detector/constants.dart';
 
+//대표 형식들 
 ThemeData theme() {
   return ThemeData(
     scaffoldBackgroundColor: Colors.white,
