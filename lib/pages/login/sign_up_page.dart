@@ -19,24 +19,34 @@ class _SignUpPageState extends State<SignUpPage> {
 //class SignUpPage extends StatelessWidget {
   static String routeName = "/sign";
   final _formKey = GlobalKey<FormState>();
+  final _idFormKey = GlobalKey<FormState>();
+  Authentication _auth = Authentication();
 
-  final TextEditingController txtId = TextEditingController();
-  final TextEditingController txtPassword = TextEditingController();
-
-  late Authentication auth;
   late String _userId; //인증 데이터 보관
+  late String _userPassword;
+
+  String _message = "";
+  String _userName = "";
+  String _userPhoneNumber = "";
 
   @override
   void initState() {
-    auth = Authentication();
+    _auth = Authentication();
     super.initState();
+  }
+
+  void _tryValidation() {
+    final isValid = _formKey.currentState!.validate();
+    if (isValid) {
+      _formKey.currentState!.save();
+    }
   }
 
   Widget idInput() {
     return Padding(
         padding: EdgeInsets.only(top: 10),
         child: TextFormField(
-          controller: txtId,
+          key: ValueKey(1),
           keyboardType: TextInputType.emailAddress,
           decoration: InputDecoration(
             hintText: '아이디를 입력해주세요',
@@ -57,9 +67,19 @@ class _SignUpPageState extends State<SignUpPage> {
               borderRadius: BorderRadius.circular(20),
             ),
           ), //입력칸 안에 써지는 글씨
-          validator: (text) => text!.isEmpty
-              ? '아이디를 입력해주세요.' //비어있을 때 에러문자
-              : null,
+          validator: (value) {
+            if (value!.isEmpty || !value.contains('@')) {
+              return 'Please enter a valid email address.';
+            } else {
+              return null;
+            }
+          },
+          onSaved: (value) {
+            _userId = value!;
+          },
+          onChanged: (value) {
+            _userId = value;
+          },
         ));
   }
 
@@ -68,7 +88,7 @@ class _SignUpPageState extends State<SignUpPage> {
     return Padding(
         padding: EdgeInsets.only(top: 10),
         child: TextFormField(
-          controller: txtPassword,
+          key: ValueKey(1),
           keyboardType: TextInputType.emailAddress,
           obscureText: true,
           decoration: InputDecoration(
@@ -91,10 +111,44 @@ class _SignUpPageState extends State<SignUpPage> {
             ),
           ),
           //입력칸 안에 써지는 글씨
-          validator: (text) => text!.isEmpty
-              ? '비밀번호를 입력해주세요.' //비어있을 때 에러문자
-              : null,
+          validator: (value) {
+            if (value!.isEmpty || value != _userPassword) {
+              return 'Password is not same.';
+            } else {
+              return null;
+            }
+          },
+          onSaved: (value) {
+            _userPassword = value!;
+          },
+          onChanged: (value) {
+            _userPassword = value;
+          },
         ));
+  }
+
+  Widget checkPassword(){
+    return Padding(
+      padding: EdgeInsets.only(top:20),
+      child: TextFormField(
+        key: ValueKey(2),
+        decoration: InputDecoration(
+          hintText: "비밀번호를 입력하세요",
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.all(Radius.circular(20)),
+            borderSide: BorderSide(color: Colors.blue),
+          ),
+        ),
+        validator: (value) {
+          if (value!.isEmpty || value != _userPassword) {
+            return 'Password is not same.';
+          }
+          else{
+            return null;
+          }
+        },
+      )
+    );
   }
 
   //회원가입 버튼
@@ -110,10 +164,9 @@ class _SignUpPageState extends State<SignUpPage> {
           ),
           onPressed: () async {
             if (_formKey.currentState!.validate()) {
-              _userId = (await auth.signUp(txtId.text, txtPassword.text))!;
-              print('Sign up for user $_userId');
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => LoginPage()));
+              _userId = (await _auth.signUp(_userId, _userPassword))!;
+              print("Sign up for user $_userId");
+              Navigator.pop(context);
             }
           },
           child: Center(
@@ -132,7 +185,7 @@ class _SignUpPageState extends State<SignUpPage> {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        title: Text("회원가입"),
+        title: Text("회원 가입"),
         //뒤로 가기 버튼
         leading: IconButton(
             icon: Icon(
@@ -146,36 +199,113 @@ class _SignUpPageState extends State<SignUpPage> {
         },
         child: SingleChildScrollView(
           padding: const EdgeInsets.all(16.0),
-          child: Form(
-            key: _formKey,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text('아이디'),
-                idInput(),
-                SizedBox(height: 20),
-                Text('비밀번호'),
-                passwordInput(),
-
-                Padding(padding: EdgeInsets.symmetric(vertical: 10)),
-                Text('- 개인정보 입력'),
-                Padding(padding: EdgeInsets.symmetric(vertical: 10)),
-                TextForm("이름"), //text_form에 작성된 class에 사용자 이름 전달
-                SizedBox(height: l_gap),
-                TextForm("핸드폰 번호 (-제외)"), //text_form에 작성된 class에 사용자 전화번호 전달
-                SizedBox(height: l_gap),
-                signupButton(),
-                Padding(padding: EdgeInsets.symmetric(vertical: 10)),
-                DefaultButton(
-                  //default_button.dart에 정의한 함수 이용해 취소 버튼 생성
-                  text: "취소",
-                  press: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => LoginPage()));
-                  },
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text('아이디'),
+              Form(
+                key: _idFormKey,
+                child: idInput(),
+              ),
+              SizedBox(height: 20),
+              //중복확인 버튼
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  primary: PrimaryColor,
+                  padding: EdgeInsets.all(10),
                 ),
-              ],
-            ),
+                onPressed: () {
+                  // validator를 따로 코딩해줘야 할 듯 (구현하려면)
+                  if (_idFormKey.currentState!.validate()) {
+                    showDialog(
+                        context: context,
+                        barrierDismissible: false,
+                        builder: (BuildContext ctx) {
+                          return AlertDialog(
+                            content: Text('사용가능한 아이디입니다.'),
+                            actions: [
+                              ElevatedButton(
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                },
+                                child: Text('확인'),
+                              )
+                            ],
+                          );
+                        });
+                  }
+                },
+                child: Center(
+                  child: Text('중복확인'),
+                ),
+              ),
+              Form(
+                key: _formKey,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SizedBox(height: l_gap),
+                    Text('비밀번호'),
+                    passwordInput(),
+                    SizedBox(height: l_gap),
+                    Text('비밀 번호를 다시 입력하세요.'),
+                    checkPassword(),
+                    Padding(padding: EdgeInsets.symmetric(vertical: 10)),
+                    Text('- 개인정보 입력'),
+                    Padding(padding: EdgeInsets.symmetric(vertical: 10)),
+                    Text("이름"), //text_form에 작성된 class에 사용자 이름 전달
+                    TextFormField(
+                      key: ValueKey(3),
+                      decoration: InputDecoration(
+                        hintText: "이름을 입력해주세요.",
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(20)),
+                          borderSide: BorderSide(color: Colors.blue),
+                        ),
+                      ),
+                      validator: (value) {
+                        if (value!.isEmpty || value.length > 9) {
+                          return 'Please enter a valid name.';
+                        }
+                        else {
+                          return null;
+                        }
+                      },
+                    ),
+                    SizedBox(height: l_gap),
+                    Text("핸드폰 번호 (-제외)"), //text_form에 작성된 class에 사용자 전화번호 전달
+                    TextFormField(
+                      key: ValueKey(4),
+                      decoration: InputDecoration(
+                        hintText: "핸드폰 번호 (-제외)",
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(20)),
+                          borderSide: BorderSide(color: Colors.blue),
+                        ),
+                      ),
+                      validator: (value) {
+                        if (value!.isEmpty || value.length != 11) {
+                          return 'Please enter a valid phone number.';
+                        }
+                        else{
+                          return null;
+                        }
+                      },
+                    ),
+                    SizedBox(height: l_gap),
+                    signupButton(),
+                    Padding(padding: EdgeInsets.symmetric(vertical: 10)),
+                    DefaultButton(
+                      //default_button.dart에 정의한 함수 이용해 취소 버튼 생성
+                      text: "취소",
+                      press: () {
+                        Navigator.pop(context);
+                      },
+                    ),
+                  ],
+                ),
+              ),
+            ],
           ),
         ),
       ),
