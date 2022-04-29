@@ -4,7 +4,6 @@ import 'package:wbc_detector/pages/login/find_id.dart';
 import 'package:wbc_detector/pages/login/find_password.dart';
 import 'package:wbc_detector/pages/login/loading_page.dart';
 import 'package:wbc_detector/pages/login/sign_up_page.dart';
-import 'package:wbc_detector/pages/main_page.dart';
 import 'package:wbc_detector/share/authentication.dart';
 import 'package:wbc_detector/theme.dart';
 
@@ -35,7 +34,7 @@ class _LoginPageState extends State<LoginPage> {
     super.initState();
   }
 
-  //아이디 입력
+  //이메일 입력
   Widget idInput() {
     return Padding(
         padding: EdgeInsets.only(top: 50),
@@ -43,7 +42,7 @@ class _LoginPageState extends State<LoginPage> {
           controller: txtId,
           keyboardType: TextInputType.emailAddress,
           decoration: InputDecoration(
-            hintText: '아이디',
+            hintText: '이메일',
             enabledBorder: OutlineInputBorder(
               //기본 TextFormField 디자인
               borderRadius: BorderRadius.circular(20),
@@ -62,7 +61,7 @@ class _LoginPageState extends State<LoginPage> {
             ),
           ), //입력칸 안에 써지는 글씨
           validator: (text) => text!.isEmpty
-              ? '아이디를 입력해주세요.' //비어있을 때 에러문자
+              ? '이메일을 입력해주세요.' //비어있을 때 에러문자
               : null,
         ));
   }

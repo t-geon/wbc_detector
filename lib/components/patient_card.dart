@@ -29,11 +29,11 @@ class PatientCard extends StatelessWidget {
           children: [
             Expanded(
               child: ListTile(
-                leading: CircleAvatar(
+                /* leading: CircleAvatar(
                   //환자 사진
                   radius: 25,
                   backgroundImage: NetworkImage(details.image),
-                ),
+                ),*/
                 title: Text(
                   details.name, //환자 이름
                   style: TextStyle(

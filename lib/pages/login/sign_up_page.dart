@@ -1,9 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:wbc_detector/components/default_button.dart';
-import 'package:wbc_detector/components/text_form.dart';
 import 'package:wbc_detector/constants.dart';
-import 'package:wbc_detector/pages/login/login_page.dart';
 import 'package:wbc_detector/share/authentication.dart';
 import 'package:wbc_detector/theme.dart';
 
@@ -49,27 +47,16 @@ class _SignUpPageState extends State<SignUpPage> {
           key: ValueKey(1),
           keyboardType: TextInputType.emailAddress,
           decoration: InputDecoration(
-            hintText: '아이디를 입력해주세요',
-            enabledBorder: OutlineInputBorder(
+            hintText: '이메일을 입력해주세요',
+            border: OutlineInputBorder(
               //기본 TextFormField 디자인
-              borderRadius: BorderRadius.circular(20),
-            ),
-            focusedBorder: OutlineInputBorder(
-              //터치시 TextFormField 디자인
-              borderRadius: BorderRadius.circular(20),
-            ),
-            errorBorder: OutlineInputBorder(
-              //에러 발생시 TextFormField 디자인
-              borderRadius: BorderRadius.circular(20),
-            ),
-            focusedErrorBorder: OutlineInputBorder(
-              //에러 발생 후 터치 시 TextFormField 디자인
-              borderRadius: BorderRadius.circular(20),
+              borderRadius: BorderRadius.all(Radius.circular(20)),
+              borderSide: BorderSide(color: Colors.blue),
             ),
           ), //입력칸 안에 써지는 글씨
           validator: (value) {
             if (value!.isEmpty || !value.contains('@')) {
-              return 'Please enter a valid email address.';
+              return '이메일을 입력해주세요.';
             } else {
               return null;
             }
@@ -93,27 +80,16 @@ class _SignUpPageState extends State<SignUpPage> {
           obscureText: true,
           decoration: InputDecoration(
             hintText: '6글자 이상 비밀번호를 입력해주세요',
-            enabledBorder: OutlineInputBorder(
+            border: OutlineInputBorder(
               //기본 TextFormField 디자인
-              borderRadius: BorderRadius.circular(20),
-            ),
-            focusedBorder: OutlineInputBorder(
-              //터치시 TextFormField 디자인
-              borderRadius: BorderRadius.circular(20),
-            ),
-            errorBorder: OutlineInputBorder(
-              //에러 발생시 TextFormField 디자인
-              borderRadius: BorderRadius.circular(20),
-            ),
-            focusedErrorBorder: OutlineInputBorder(
-              //에러 발생 후 터치 시 TextFormField 디자인
-              borderRadius: BorderRadius.circular(20),
+              borderRadius: BorderRadius.all(Radius.circular(20)),
+              borderSide: BorderSide(color: Colors.blue),
             ),
           ),
           //입력칸 안에 써지는 글씨
           validator: (value) {
             if (value!.isEmpty || value != _userPassword) {
-              return 'Password is not same.';
+              return '비밀번호를 입력해주세요.';
             } else {
               return null;
             }
@@ -127,28 +103,26 @@ class _SignUpPageState extends State<SignUpPage> {
         ));
   }
 
-  Widget checkPassword(){
+  Widget checkPassword() {
     return Padding(
-      padding: EdgeInsets.only(top:20),
-      child: TextFormField(
-        key: ValueKey(2),
-        decoration: InputDecoration(
-          hintText: "비밀번호를 입력하세요",
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.all(Radius.circular(20)),
-            borderSide: BorderSide(color: Colors.blue),
+        padding: EdgeInsets.only(top: 20),
+        child: TextFormField(
+          key: ValueKey(2),
+          decoration: InputDecoration(
+            hintText: "비밀번호를 입력하세요",
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.all(Radius.circular(20)),
+              borderSide: BorderSide(color: Colors.blue),
+            ),
           ),
-        ),
-        validator: (value) {
-          if (value!.isEmpty || value != _userPassword) {
-            return 'Password is not same.';
-          }
-          else{
-            return null;
-          }
-        },
-      )
-    );
+          validator: (value) {
+            if (value!.isEmpty || value != _userPassword) {
+              return '비밀번호가 같지 않습니다.';
+            } else {
+              return null;
+            }
+          },
+        ));
   }
 
   //회원가입 버튼
@@ -202,7 +176,7 @@ class _SignUpPageState extends State<SignUpPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text('아이디'),
+              Text('이메일'),
               Form(
                 key: _idFormKey,
                 child: idInput(),
@@ -222,7 +196,7 @@ class _SignUpPageState extends State<SignUpPage> {
                         barrierDismissible: false,
                         builder: (BuildContext ctx) {
                           return AlertDialog(
-                            content: Text('사용가능한 아이디입니다.'),
+                            content: Text('사용가능한 이메일입니다.'),
                             actions: [
                               ElevatedButton(
                                 onPressed: () {
@@ -265,9 +239,8 @@ class _SignUpPageState extends State<SignUpPage> {
                       ),
                       validator: (value) {
                         if (value!.isEmpty || value.length > 9) {
-                          return 'Please enter a valid name.';
-                        }
-                        else {
+                          return '이름을 입력해주세요.';
+                        } else {
                           return null;
                         }
                       },
@@ -285,9 +258,8 @@ class _SignUpPageState extends State<SignUpPage> {
                       ),
                       validator: (value) {
                         if (value!.isEmpty || value.length != 11) {
-                          return 'Please enter a valid phone number.';
-                        }
-                        else{
+                          return '핸드폰 번호를 입력해주세요.';
+                        } else {
                           return null;
                         }
                       },
