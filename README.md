@@ -1,16 +1,15 @@
 # wbc_detector
 
-A new Flutter project.
+flutter_app을 기반으로 firebase를 연결해서 구현중인
+wbc_detector앱 입니다.
 
-## Getting Started
+# 로그인
+cloud_firestore를 DB로 이용해 구현중 
 
-This project is a starting point for a Flutter application.
+- 실패 팝업
+- 아이디 찾기 비밀번호 찾기는 다 구현하고 추가로 구현하면 될 듯(이건 회원가입할 때 db에 내용 저장하도록 수정해야할수도)
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+서버 별도 구현 중
+flask를 이용해 서버에 모델을 올려 앱과 연동하는 중
+딥러닝 모델을 pkl파일로 서버에 올린후 서버에서 동작하도록 할 예정
+모델에서 비주얼화 한 백혈구 데이터를 가져올 예정
