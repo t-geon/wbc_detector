@@ -9,7 +9,7 @@ import 'package:wbc_detector/theme.dart';
 
 //회원가입 페이지
 class SignUpPage extends StatefulWidget {
-  static String routeName = "/login";
+  static String routeName = "/sign";
 
   @override
   State<SignUpPage> createState() => _SignUpPageState();
