@@ -37,8 +37,13 @@ class IdPageCusttom extends StatelessWidget {
                                   //예 버튼 만들기, 버튼 클릭시 이동
                                   onPressed: () {
                                     Navigator.of(context).pop(); //팝업 닫기
-                                    Navigator.pushNamed(
-                                        context, "/login"); //로그인 페이지 이동
+                                    auth.signOut().then((result) {
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  LoginPage()));
+                                    });
                                   },
                                   child: Text("예")),
                               FlatButton(

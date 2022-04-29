@@ -61,8 +61,7 @@ class FindID extends StatelessWidget {
                   //default_button.dart에 정의한 함수 이용해 취소 버튼 생성
                   text: "취소",
                   press: () {
-                    Navigator.pushNamed(
-                        context, "/login"); //취소 버튼 누르면 계정 정보화면 이동
+                    Navigator.pop(context); //취소 버튼 누르면 계정 정보화면 이동
                   },
                 ),
               ],

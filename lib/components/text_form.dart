@@ -32,8 +32,16 @@ class TextForm extends StatelessWidget {
                                       ? true
                                       : false,
           decoration: InputDecoration(
-            hintText: "$text를 입력해주세요", //입력 칸 안에 비었을 때 문구
-            enabledBorder: OutlineInputBorder(
+            hintText: text == "검사 날짜"
+                ? "yyyy-mm-dd에 맞게 입력해주세요"
+                : "$text를 입력해주세요", //입력 칸 안에 비었을 때 문구
+            border: OutlineInputBorder(
+              //기본 TextFormField 디자인
+              borderRadius: BorderRadius.all(Radius.circular(20)),
+              borderSide: BorderSide(color: Colors.blue),
+            ),
+          ),
+          /*enabledBorder: OutlineInputBorder(
               //기본 TextFormField 디자인
               borderRadius: BorderRadius.circular(20),
             ),
@@ -49,7 +57,7 @@ class TextForm extends StatelessWidget {
               //에러 발생 후 터치 시 TextFormField 디자인
               borderRadius: BorderRadius.circular(20),
             ),
-          ),
+          ),*/
         ),
       ],
     );

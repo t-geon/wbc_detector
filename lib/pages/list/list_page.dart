@@ -14,7 +14,7 @@ class ListPage extends StatelessWidget {
 }
 
 class PatientList extends StatefulWidget {
-  PatientList() {
+  PatientList({Key? key}) : super(key: key) {
     Firebase.initializeApp();
   }
 
