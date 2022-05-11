@@ -40,7 +40,7 @@ class ResultPage extends StatelessWidget {
                   child:
                       //Image.network('http://geon2331.pythonanywhere.com/static/book.jpg'), //결과 이미지 가져오기
                       Image.network(
-                          'http://192.168.219.102:5000/show/2022041016213420.gif'), //서버에 있는 이미지 읽어오기
+                          'http://192.168.219.100:5000/show/2022041016213420.gif'), //서버에 있는 이미지 읽어오기
                 ),
               ),
 
