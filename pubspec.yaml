@@ -30,13 +30,15 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_svg: ^1.0.3   #svg파일 사용하는 라이브러리
-  file_picker: ^4.4.0   #파일 선택 하는 것 만들기
+  file_picker: ^4.5.1   #파일 선택 하는 것 만들기
   open_file: ^3.2.1   #open파일 관리
   path_provider: ^2.0.9 #파일 저장할 수 있는 저장소
 
   firebase_core: ^1.13.1  #파이어베이스
   firebase_auth: ^3.3.9 #파이어베이스 인증
   cloud_firestore: ^3.1.10  #파이어스토어(DB)
+
+  dio: ^4.0.6
 
 
   # The following adds the Cupertino Icons font to your application.

@@ -1,12 +1,18 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:wbc_detector/components/default_button.dart';
 
 import '../components/text_form.dart';
 import '../constants.dart';
 
+import 'home_page.dart' as home;
+
 class ResultPage extends StatelessWidget {
   static String routeName = "/result";
   final _formKey = GlobalKey<FormState>();
+  final name = TextEditingController();
+  final time = TextEditingController();
+  final content = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -34,15 +40,16 @@ class ResultPage extends StatelessWidget {
               ),
               SizedBox(height: 20),
 
-              Padding(
-                padding: EdgeInsets.only(left: 0.0),
-                child: Container(
-                  child:
-                      //Image.network('http://geon2331.pythonanywhere.com/static/book.jpg'), //결과 이미지 가져오기
-                      Image.network(
-                          'http://192.168.219.100:5000/show/2022041016213420.gif'), //서버에 있는 이미지 읽어오기
+              //여기서 변수로 해당 response값 저장해두기 ->나중에 image에다가 넣어서 데이터베이스에 저장
+              if (home.res != "")
+                Padding(
+                  padding: EdgeInsets.only(left: 0.0),
+                  child: Container(
+                    //여기서 서버컴 주소로 바꿔야함
+                    child: Image.network('http://192.168.219.100:5000/show/' +
+                        "${home.res + '.gif'}"), //결과 이미지 가져오기오기
+                  ),
                 ),
-              ),
 
               SizedBox(height: 30),
               Container(
@@ -63,45 +70,64 @@ class ResultPage extends StatelessWidget {
                 child: Padding(
                   padding: const EdgeInsets.all(0.0),
                   child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      TextForm("환자 이름"),
+                      Text("환자 이름", textAlign: TextAlign.start),
+                      TextFormField(
+                        controller: name,
+                        validator: (value) => value!.isEmpty //값 없으면 해당 문구 출력
+                            ? "환자 이름을 입력해주세요." //빨간색 문구 출력
+                            : null,
+                        decoration: InputDecoration(
+                          hintText: "환자 이름을 입력해주세요", //입력 칸 안에 비었을 때 문구
+                          border: OutlineInputBorder(
+                            //기본 TextFormField 디자인
+                            borderRadius: BorderRadius.all(Radius.circular(20)),
+                            borderSide: BorderSide(color: Colors.blue),
+                          ),
+                        ),
+                      ),
+                      //TextForm("환자 이름"),
                       SizedBox(height: 10),
-                      TextForm("검사 날짜"),
+                      Text("검사 날짜", textAlign: TextAlign.start),
+                      TextFormField(
+                        controller: time,
+                        validator: (value) => value!.isEmpty //값 없으면 해당 문구 출력
+                            ? "검사 날짜를 입력해주세요." //빨간색 문구 출력
+                            : null,
+                        decoration: InputDecoration(
+                          hintText: "yyyy/mm/dd에 맞게 입력해주세요", //입력 칸 안에 비었을 때 문구
+                          border: OutlineInputBorder(
+                            //기본 TextFormField 디자인
+                            borderRadius: BorderRadius.all(Radius.circular(20)),
+                            borderSide: BorderSide(color: Colors.blue),
+                          ),
+                        ),
+                      ),
+                      //TextForm("검사 내용"),
                       SizedBox(height: 10),
-                      TextForm("검사 내용"),
+                      Text("검사 내용", textAlign: TextAlign.start),
+                      TextFormField(
+                        controller: content,
+                        validator: (value) => value!.isEmpty //값 없으면 해당 문구 출력
+                            ? "검사 내용을 입력해주세요." //빨간색 문구 출력
+                            : null,
+                        decoration: InputDecoration(
+                          hintText: "검사 내용을 입력해주세요", //입력 칸 안에 비었을 때 문구
+                          border: OutlineInputBorder(
+                            //기본 TextFormField 디자인
+                            borderRadius: BorderRadius.all(Radius.circular(20)),
+                            borderSide: BorderSide(color: Colors.blue),
+                          ),
+                        ),
+                      ),
 
-                      //검사내용 입력(내용에 맞게 늘어남)
-                      /*Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text("검사 내용"),
-                          Row(children: const [
-                            Expanded(
-                              child: TextField(
-                                keyboardType: TextInputType.multiline,
-                                maxLines: 5,
-                                minLines: 1,
-                                decoration: InputDecoration(
-                                  hintText: '검사 내용을 입력해주세요',
-                                  border: OutlineInputBorder(
-                                    //기본 TextFormField 디자인
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(20)),
-                                    borderSide: BorderSide(color: Colors.blue),
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ])
-                        ],
-                      ),*/
                       SizedBox(height: 20),
                       DefaultButton(
                         //default_button.dart에 정의한 함수 이용해 찾기 버튼 생성
                         text: "검사 내용 등록",
                         press: () {
                           if (_formKey.currentState!.validate()) {
-                            //성공시 아이디 알려주고, 실패시 없는 정보라고 알리기
                             showDialog(
                               context: context,
                               barrierDismissible: false,
@@ -112,6 +138,16 @@ class ResultPage extends StatelessWidget {
                                   actions: [
                                     FlatButton(
                                       onPressed: () {
+                                        final userCollectionReference =
+                                            FirebaseFirestore.instance
+                                                .collection("patient_details");
+                                        //.doc();
+                                        userCollectionReference.add({
+                                          "content": content.text,
+                                          "name": name.text,
+                                          "time": time.text,
+                                          "image": home.res
+                                        });
                                         Navigator.pushNamed(context, "/main");
                                       },
                                       child: Text('확인'),

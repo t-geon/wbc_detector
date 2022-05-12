@@ -33,7 +33,7 @@ class TextForm extends StatelessWidget {
                                       : false,
           decoration: InputDecoration(
             hintText: text == "검사 날짜"
-                ? "yyyy-mm-dd에 맞게 입력해주세요"
+                ? "yyyy/mm/dd에 맞게 입력해주세요"
                 : "$text를 입력해주세요", //입력 칸 안에 비었을 때 문구
             border: OutlineInputBorder(
               //기본 TextFormField 디자인
