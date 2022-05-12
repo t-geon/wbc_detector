@@ -61,7 +61,7 @@ dev_dependencies:
 
 # The following section is specific to Flutter.
 flutter:
-  #font추가
+  #font추가, 글씨체
   fonts:
     - family: NanumGothic
       fonts:

@@ -49,7 +49,6 @@ class ResultPage extends StatelessWidget {
                     child: Image.network('http://192.168.219.100:5000/show/' +
                         "${home.res + '.gif'}"), //결과 이미지 가져오기오기
                   ),
-                ),
 
               SizedBox(height: 30),
               Container(

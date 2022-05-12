@@ -89,7 +89,6 @@ class HomePage extends StatelessWidget {
               ),
               onPressed: () async {
                 res = "2022041016213420";
-
                 loadImage(); //파일 선택 후 서버에 전달
 
                 /*
