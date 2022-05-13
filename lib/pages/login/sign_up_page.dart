@@ -108,6 +108,7 @@ class _SignUpPageState extends State<SignUpPage> {
         padding: EdgeInsets.only(top: 20),
         child: TextFormField(
           key: ValueKey(2),
+          obscureText: true,
           decoration: InputDecoration(
             hintText: "비밀번호를 입력하세요",
             border: OutlineInputBorder(
@@ -222,7 +223,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     Text('비밀번호'),
                     passwordInput(),
                     SizedBox(height: l_gap),
-                    Text('비밀 번호를 다시 입력하세요.'),
+                    Text('비밀번호를 다시 입력하세요.'),
                     checkPassword(),
                     Padding(padding: EdgeInsets.symmetric(vertical: 10)),
                     Text('- 개인정보 입력'),

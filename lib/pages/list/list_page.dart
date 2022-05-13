@@ -31,7 +31,7 @@ class _PatientListState extends State<PatientList> {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        title: Text("검사 목록"),
+        title: Text("WBC Detector with DVS"),
       ),
       body: ListView(
         //리스트 생성

@@ -31,6 +31,14 @@ class SplashPage extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                     color: Colors.white)),
           ),
+          SizedBox(height: s_gap),
+          Center(
+            child: Text("with DVS",
+                style: TextStyle(
+                    fontSize: 25.0,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white)),
+          ),
           SizedBox(height: xl_gap),
           Expanded(
             //터치 해서 넘어가는 글자 삽입
@@ -39,14 +47,16 @@ class SplashPage extends StatelessWidget {
               padding: EdgeInsets.all(24),
               child: TextButton(
                 child: Text(
-                  "진행하려면 글씨를 터치해주세요.",
+                  "진행하려면 터치해주세요.",
                   style: TextStyle(fontSize: 20),
                 ),
                 onPressed: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => LoadingPage()));
-                  //MaterialPageRoute(builder: (context) => LoginPage()));
-                  //_completeSplash(context, LoginPage());
+                  Navigator.pushAndRemoveUntil(
+                      context,
+                      MaterialPageRoute(
+                          builder: (BuildContext context) => LoginPage()),
+                      (route) => false);
+                  //Navigator.push(context,MaterialPageRoute(builder: (context) => LoadingPage()));
                 },
               ),
             ),

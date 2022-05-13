@@ -10,7 +10,7 @@ class SettingPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        title: Text("설정"),
+        title: Text("WBC Detector with DVS"),
       ),
       body: SingleChildScrollView(
         child: SettingCustom(),

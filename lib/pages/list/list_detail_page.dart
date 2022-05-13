@@ -16,7 +16,7 @@ class _ListDetailPageState extends State<ListDetailPage> {
       child: Scaffold(
         appBar: AppBar(
           automaticallyImplyLeading: false,
-          title: Text("검사 상세 내용"),
+          title: Text("검진 상세 내용"),
           leading: IconButton(
               icon: Icon(
                 Icons.arrow_back,
@@ -28,7 +28,7 @@ class _ListDetailPageState extends State<ListDetailPage> {
           child: Column(
             children: [
               Text(
-                "백혈구 관찰 결과",
+                "검진 영상",
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 20,
@@ -51,7 +51,7 @@ class _ListDetailPageState extends State<ListDetailPage> {
                   child: Divider(color: Colors.black, thickness: 2.0)), //실선
               SizedBox(height: 15),
               Text(
-                "검사 내용",
+                "검진 내용",
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 20,
@@ -60,17 +60,62 @@ class _ListDetailPageState extends State<ListDetailPage> {
               ),
               SizedBox(height: 20),
 
-              Text("환자 이름 : ${pc.select.name}",
-                  style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold)),
-              SizedBox(height: 20),
+              Row(
+                children: [
+                  SizedBox(width: 10),
+                  Text(
+                    "환자 이름 : ",
+                    textAlign: TextAlign.start,
+                    style: const TextStyle(
+                      fontSize: 17,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  Text(" ${pc.select.name}", style: TextStyle(fontSize: 17)),
+                ],
+              ),
 
-              Text("검사 날짜 : ${pc.select.time}",
-                  style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold)),
               SizedBox(height: 20),
+              Row(
+                children: [
+                  SizedBox(width: 10),
+                  Text(
+                    "검진 날짜 : ",
+                    textAlign: TextAlign.start,
+                    style: const TextStyle(
+                      fontSize: 17,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  Text(" ${pc.select.time}", style: TextStyle(fontSize: 17)),
+                ],
+              ),
 
-              Text("검사 내용 : ${pc.select.content}",
-                  style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold)),
               SizedBox(height: 20),
+              Row(
+                children: [
+                  SizedBox(width: 10),
+                  Text(
+                    "검진 내용",
+                    textAlign: TextAlign.start,
+                    style: const TextStyle(
+                      fontSize: 17,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  )
+                ],
+              ),
+              Container(
+                margin: const EdgeInsets.all(10),
+                alignment: Alignment.topLeft,
+                decoration: BoxDecoration(
+                    border: Border.all(
+                      width: 2,
+                    ),
+                    borderRadius: BorderRadius.circular(5)),
+                child: Text("${pc.select.content}",
+                    style: TextStyle(fontSize: 17)),
+              )
             ],
           ),
         ),
