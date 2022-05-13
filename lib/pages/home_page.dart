@@ -1,11 +1,6 @@
-import 'dart:io';
-
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dio/dio.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
-import 'package:open_file/open_file.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:wbc_detector/constants.dart';
 
 String res = "";
@@ -63,16 +58,16 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        title: Text("홈"),
+        title: Text("WBC Detector with DVS"),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            SizedBox(height: xl_gap),
+            SizedBox(height: 150),
             Text(
-              'WBC Detector with DVS',
+              '백혈구 검진 파일 등록 ',
               textAlign: TextAlign.center,
               style: const TextStyle(
                 fontSize: 25,
@@ -80,7 +75,15 @@ class HomePage extends StatelessWidget {
                 color: Colors.indigo,
               ),
             ),
-            SizedBox(height: xl_gap),
+            SizedBox(height: 30),
+            Text(
+              '아래 버튼을 이용해 검진할 파일을 선택해주세요 :)',
+              textAlign: TextAlign.center,
+              style: const TextStyle(
+                fontSize: 15,
+              ),
+            ),
+            SizedBox(height: 80),
             ElevatedButton(
               //파일선택 클릭시 파일 선택할 수 있도록 만들기
               style: ElevatedButton.styleFrom(
@@ -121,8 +124,8 @@ class HomePage extends StatelessWidget {
                 */
               },
               child: Text(
-                "aedat4.0 파일 선택",
-                style: TextStyle(fontSize: 16),
+                "등록하러 가기",
+                style: TextStyle(fontSize: 17),
               ),
             ),
           ],

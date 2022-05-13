@@ -41,7 +41,7 @@ class TextMenuCard extends StatelessWidget {
               SizedBox(
                 width: 26,
                 child: IconButton(
-                  onPressed: () {},
+                  onPressed: press,
                   icon: SvgPicture.asset(
                     icon ?? "assets/icons/right-arrow.svg",
                     color: iconColor,

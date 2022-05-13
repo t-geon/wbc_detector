@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:wbc_detector/components/default_button.dart';
+import 'package:wbc_detector/pages/main_page.dart';
 
 import '../components/text_form.dart';
 import '../constants.dart';
@@ -19,7 +20,7 @@ class ResultPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        title: Text("측정 결과"),
+        title: Text("WBC Detector with DVS"),
       ),
       //body: Center(child: Text("result page")),
       body: GestureDetector(
@@ -31,7 +32,7 @@ class ResultPage extends StatelessWidget {
           child: Column(
             children: [
               Text(
-                "백혈구 관찰 결과",
+                "검진 영상",
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 20,
@@ -57,7 +58,7 @@ class ResultPage extends StatelessWidget {
                   child: Divider(color: Colors.black, thickness: 2.0)), //실선
               SizedBox(height: 15),
               Text(
-                "검사 내용",
+                "검진 내용",
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 20,
@@ -72,7 +73,20 @@ class ResultPage extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text("환자 이름", textAlign: TextAlign.start),
+                      Row(
+                        children: [
+                          SizedBox(width: 10),
+                          Text(
+                            "환자 이름",
+                            textAlign: TextAlign.start,
+                            style: const TextStyle(
+                              fontSize: 15,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: 5),
                       TextFormField(
                         controller: name,
                         validator: (value) => value!.isEmpty //값 없으면 해당 문구 출력
@@ -87,13 +101,26 @@ class ResultPage extends StatelessWidget {
                           ),
                         ),
                       ),
-                      //TextForm("환자 이름"),
-                      SizedBox(height: 10),
-                      Text("검사 날짜", textAlign: TextAlign.start),
+
+                      SizedBox(height: 15),
+                      Row(
+                        children: [
+                          SizedBox(width: 10),
+                          Text(
+                            "검진 날짜",
+                            textAlign: TextAlign.start,
+                            style: const TextStyle(
+                              fontSize: 15,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: 5),
                       TextFormField(
                         controller: time,
                         validator: (value) => value!.isEmpty //값 없으면 해당 문구 출력
-                            ? "검사 날짜를 입력해주세요." //빨간색 문구 출력
+                            ? "검진 날짜를 입력해주세요." //빨간색 문구 출력
                             : null,
                         decoration: InputDecoration(
                           hintText: "yyyy/mm/dd에 맞게 입력해주세요", //입력 칸 안에 비었을 때 문구
@@ -105,15 +132,29 @@ class ResultPage extends StatelessWidget {
                         ),
                       ),
                       //TextForm("검사 내용"),
-                      SizedBox(height: 10),
-                      Text("검사 내용", textAlign: TextAlign.start),
+                      SizedBox(height: 15),
+
+                      Row(
+                        children: [
+                          SizedBox(width: 10),
+                          Text(
+                            "검진 내용",
+                            textAlign: TextAlign.start,
+                            style: const TextStyle(
+                              fontSize: 15,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: 5),
                       TextFormField(
                         controller: content,
                         validator: (value) => value!.isEmpty //값 없으면 해당 문구 출력
-                            ? "검사 내용을 입력해주세요." //빨간색 문구 출력
+                            ? "검진 내용을 입력해주세요." //빨간색 문구 출력
                             : null,
                         decoration: InputDecoration(
-                          hintText: "검사 내용을 입력해주세요", //입력 칸 안에 비었을 때 문구
+                          hintText: "검진 내용을 입력해주세요", //입력 칸 안에 비었을 때 문구
                           border: OutlineInputBorder(
                             //기본 TextFormField 디자인
                             borderRadius: BorderRadius.all(Radius.circular(20)),
@@ -122,10 +163,70 @@ class ResultPage extends StatelessWidget {
                         ),
                       ),
 
-                      SizedBox(height: 20),
+                      SizedBox(height: 30),
+                      Container(
+                        alignment: Alignment.center,
+                        child: ElevatedButton(
+                          child: Text(
+                            '        등록하기        ',
+                            style: const TextStyle(
+                              fontSize: 17,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          style: ElevatedButton.styleFrom(
+                              primary: PrimaryColor,
+                              elevation: 0.0,
+                              minimumSize: Size.fromRadius(25),
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10.0))),
+                          onPressed: () {
+                            if (_formKey.currentState!.validate()) {
+                              showDialog(
+                                context: context,
+                                barrierDismissible: false,
+                                builder: (BuildContext ctx) {
+                                  return AlertDialog(
+                                    title: Text('검진 내용 등록.'), //제목
+                                    content:
+                                        Text('검진 내용 등록을 성공적으로 완료했습니다.'), //내용
+                                    actions: [
+                                      FlatButton(
+                                        onPressed: () {
+                                          final userCollectionReference =
+                                              FirebaseFirestore.instance
+                                                  .collection(
+                                                      "patient_details");
+                                          userCollectionReference.add({
+                                            "content": content.text,
+                                            "name": name.text,
+                                            "time": time.text,
+                                            "image": home.res
+                                          });
+                                          Navigator.pushAndRemoveUntil(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder:
+                                                      (BuildContext context) =>
+                                                          MainPage()),
+                                              (route) => false);
+                                          //Navigator.pushNamed(context, "/main");
+                                        },
+                                        child: Text('확인'),
+                                      ),
+                                    ],
+                                  );
+                                },
+                              );
+                            }
+                          },
+                        ),
+                      ),
+/*
                       DefaultButton(
                         //default_button.dart에 정의한 함수 이용해 찾기 버튼 생성
-                        text: "검사 내용 등록",
+                        text: "등록하기",
+
                         press: () {
                           if (_formKey.currentState!.validate()) {
                             showDialog(
@@ -133,8 +234,8 @@ class ResultPage extends StatelessWidget {
                               barrierDismissible: false,
                               builder: (BuildContext ctx) {
                                 return AlertDialog(
-                                  title: Text('검사 내용 등록.'), //제목
-                                  content: Text('검사 내용 등록을 성공적으로 완료했습니다.'), //내용
+                                  title: Text('검진 내용 등록.'), //제목
+                                  content: Text('검진 내용 등록을 성공적으로 완료했습니다.'), //내용
                                   actions: [
                                     FlatButton(
                                       onPressed: () {
@@ -159,6 +260,7 @@ class ResultPage extends StatelessWidget {
                           }
                         },
                       ),
+                      */
                     ],
                   ),
                 ),

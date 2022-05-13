@@ -1,5 +1,7 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:wbc_detector/model/text_menu.dart';
+import 'package:wbc_detector/pages/home_page.dart';
 import 'package:wbc_detector/pages/login/login_page.dart';
 import 'package:wbc_detector/share/authentication.dart';
 import '../../components/text_menu_card.dart';
@@ -36,14 +38,14 @@ class IdPageCusttom extends StatelessWidget {
                               FlatButton(
                                   //예 버튼 만들기, 버튼 클릭시 이동
                                   onPressed: () {
+                                    FirebaseAuth.instance.currentUser?.delete();
                                     Navigator.of(context).pop(); //팝업 닫기
-                                    auth.signOut().then((result) {
-                                      Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  LoginPage()));
-                                    });
+                                    Navigator.pushAndRemoveUntil(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (BuildContext context) =>
+                                                LoginPage()),
+                                        (route) => false);
                                   },
                                   child: Text("예")),
                               FlatButton(
@@ -59,8 +61,12 @@ class IdPageCusttom extends StatelessWidget {
                   } else if (idMenuList[index].path == "/login") {
                     //로그아웃 누른 경우
                     auth.signOut().then((result) {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => LoginPage()));
+                      Navigator.pushAndRemoveUntil(
+                          context,
+                          MaterialPageRoute(
+                              builder: (BuildContext context) => LoginPage()),
+                          (route) => false);
+                      //Navigator.push(context, MaterialPageRoute(builder: (context) => LoginPage()));
                     });
                   } else {
                     //경로가 정해진 경우 해당 경로로 이동

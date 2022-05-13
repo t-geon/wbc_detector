@@ -115,8 +115,12 @@ class _LoginPageState extends State<LoginPage> {
             if (_formKey.currentState!.validate()) {
               _userId = (await auth.login(txtId.text, txtPassword.text))!;
               print('Login for user $_userId');
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => LoadingPage()));
+              Navigator.pushAndRemoveUntil(
+                  context,
+                  MaterialPageRoute(
+                      builder: (BuildContext context) => LoadingPage()),
+                  (route) => false);
+              //Navigator.push(context,MaterialPageRoute(builder: (context) => LoadingPage()));
             }
           },
           child: Center(
@@ -170,8 +174,41 @@ class _LoginPageState extends State<LoginPage> {
             child: Column(
               children: [
                 SizedBox(height: xl_gap),
-                Text(
+                /*Text(
                   'WBC Detector \n 로그인',
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(
+                    fontSize: 30,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.indigo,
+                  ),
+                ),
+                 */
+
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      'WBC Detector ',
+                      textAlign: TextAlign.center,
+                      style: const TextStyle(
+                        fontSize: 30,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.indigo,
+                      ),
+                    ),
+                    Text(
+                      'with DVS',
+                      style: const TextStyle(
+                        fontSize: 15,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.indigo,
+                      ),
+                    )
+                  ],
+                ),
+                Text(
+                  '로그인',
                   textAlign: TextAlign.center,
                   style: const TextStyle(
                     fontSize: 30,

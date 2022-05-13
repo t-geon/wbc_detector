@@ -26,8 +26,12 @@ class PatientCard extends StatelessWidget {
           ),
         );
       },
-      child: Padding(
+      child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+        decoration: BoxDecoration(
+          border:
+              Border(bottom: BorderSide(color: Colors.grey, width: 2)), //구분선
+        ),
         //환자 검사목록 중 1개 구성
         child: Row(
           children: [
