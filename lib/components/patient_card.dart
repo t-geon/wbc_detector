@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:wbc_detector/model/patient.dart';
 import 'package:wbc_detector/pages/list/list_detail_page.dart';
 
+PatientDetail select = Null as PatientDetail;
+
 class PatientCard extends StatelessWidget {
   const PatientCard({
     Key? key,
@@ -15,6 +17,8 @@ class PatientCard extends StatelessWidget {
     return InkWell(
       onTap: () {
         //해당 환자 목록 누르면 상세정보 창으로 넘어간다.
+        select = details;
+
         Navigator.push(
           context,
           MaterialPageRoute(
@@ -29,11 +33,6 @@ class PatientCard extends StatelessWidget {
           children: [
             Expanded(
               child: ListTile(
-                /* leading: CircleAvatar(
-                  //환자 사진
-                  radius: 25,
-                  backgroundImage: NetworkImage(details.image),
-                ),*/
                 title: Text(
                   details.name, //환자 이름
                   style: TextStyle(
