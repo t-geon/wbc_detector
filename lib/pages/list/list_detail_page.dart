@@ -40,7 +40,7 @@ class _ListDetailPageState extends State<ListDetailPage> {
               Padding(
                 padding: EdgeInsets.only(left: 0.0),
                 child: Container(
-                  child: Image.network('http://192.168.219.100:5000/show/' +
+                  child: Image.network('http://192.168.219.101:5000/show/' +
                       "${pc.select.image + '.gif'}"), //결과 이미지 가져오기
                 ),
               ),

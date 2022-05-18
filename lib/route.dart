@@ -17,7 +17,7 @@ import 'package:wbc_detector/pages/splash_page.dart';
 final Map<String, WidgetBuilder> route = {
   SplashPage.routeName: (context) => SplashPage(),
   LoginPage.routeName: (context) => LoginPage(),
-  HomePage.routeName: (context) => HomePage(),
+  //HomePage.routeName: (context) => HomePage(),
   ListPage.routeName: (context) => ListPage(),
   ResultPage.routeName: (context) => ResultPage(),
   SettingPage.routeName: (context) => SettingPage(),

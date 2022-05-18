@@ -1,9 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:wbc_detector/components/default_button.dart';
 import 'package:wbc_detector/pages/main_page.dart';
 
-import '../components/text_form.dart';
 import '../constants.dart';
 
 import 'home_page.dart' as home;
@@ -21,6 +19,12 @@ class ResultPage extends StatelessWidget {
       appBar: AppBar(
         automaticallyImplyLeading: false,
         title: Text("WBC Detector with DVS"),
+        leading: IconButton(
+          icon: Icon(
+            Icons.arrow_back,
+          ),
+          onPressed: () => Navigator.popAndPushNamed(context, '/main'),
+        ),
       ),
       //body: Center(child: Text("result page")),
       body: GestureDetector(
@@ -43,12 +47,14 @@ class ResultPage extends StatelessWidget {
 
               //여기서 변수로 해당 response값 저장해두기 ->나중에 image에다가 넣어서 데이터베이스에 저장
               if (home.res != "")
+                //home.res는 gif파일 이름
                 Padding(
                   padding: EdgeInsets.only(left: 0.0),
                   child: Container(
                     //여기서 서버컴 주소로 바꿔야함
-                    child: Image.network('http://192.168.219.100:5000/show/' +
-                        "${home.res + '.gif'}"), //결과 이미지 가져오기오기
+                    child: Image.network('http://192.168.219.101:5000/show/' +
+                        "${home.res + '.gif'}"),
+                    //Image.network('http://223.194.45.74:5000/show/' + 1.jpg"), //결과 이미지 가져오기오기
                   ),
                 ),
 
