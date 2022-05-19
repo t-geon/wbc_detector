@@ -7,6 +7,7 @@ import 'package:wbc_detector/pages/list/list_page.dart';
 import 'package:wbc_detector/pages/result_page.dart';
 import 'package:wbc_detector/pages/setting/setting_page.dart';
 
+//bottom menu만드는 page (main page안에 home, result, list, setting 열린다고 생각하면 된다.)
 class MainPage extends StatefulWidget {
   static String routeName = "/main";
 

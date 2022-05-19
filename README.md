@@ -1,16 +1,94 @@
 # wbc_detector
 
-A new Flutter project.
 
-## Getting Started
+안드로이드 스튜디오, flutter를 이용했습니다.    
+DVS로 촬영한 데이터를 사용해 aedat4파일을 입력으로 넣으면
+해당 파일의 백혈구를 detection해 박싱하고 정확도와 같이 출력되는 gif파일을 통해 환자 및 사람들의 건강상태를 모니터링하는 애플리케이션을 개발중입니다. 
+flutter_app의 디자인을 기반으로 firebase를 연결해서 구현중인 wbc_detector앱 입니다.
+ 
+ 
+## splash화면 (초기 화면)
+- 아래 글씨 터치시 로그인 화면으로 이동
 
-This project is a starting point for a Flutter application.
 
-A few resources to get you started if this is your first Flutter project:
+## 로그인 화면
+cloud_firestore를 DB로 이용해 구현중 
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+- 아이디 입력, 비밀번호 입력창 (비밀번호는 * 처리)
+- 로그인 버튼    
+-> 기존에 login custom사용해서 login화면 구현했는데 현재 login page에 모두 구현
+- 회원가입 버튼 
+   
+    1. 아이디 찾기 화면
+        - 뒤로가기 버튼 존재
+        - 이름, 핸드폰 번호 입력창
+        - 아이디 찾기, 취소 버튼
+        - 파이어베이스 이용한 아이디 찾기    
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+
+    2. 비밀번호 찾기 화면
+        - 뒤로가기 버튼 존재
+        - 이름, 핸드폰 번호, 아이디 입력
+        - 비밀번호 찾기, 취소 버튼
+        - 성공, 실패 팝업 구분 
+             
+             
+    3. 회원 가입 화면
+        - 뒤로가기 버튼 존재
+        - 회원가입 양식(입력, 버튼)
+        - 파이어베이스 이용한 회원가입
+
+
+## 홈 화면
+- 하단 메뉴를 통해 이동 가능
+- 파일 선택 버튼(file picker)
+
+
+## 검사 결과 화면
+- 하단 메뉴를 통해 이동 가능
+- 영상 서버에서 받아올 수 있는 기능
+
+
+## 검사 목록 화면
+- 하단 메뉴를 통해 이동 가능
+- 검사 정보가 일부 보이도록 구성
+- 목록을 아래로 내릴 수 있도록 ListView로 작성
+- 목록 클릭시 상세 정보 페이지로 이동
+
+
+## 검사 상세 내용 화면
+- 뒤로가기 버튼 존재
+
+
+## 옵션 화면
+ - 하단 메뉴를 통해 이동 가능
+
+    1. 계정정보 화면
+        - 로그아웃
+          - 버튼 클릭시 로그인 화면으로
+          
+        - 비밀번호 변경
+          - 비밀번호 변경 페이지
+            - 기존 비밀번호 입력
+            - 변경 비밀번호 입력
+            - 변경 비밀번호 확인
+          
+        - 회원탈퇴
+          - 팝업
+          - 팝업에서 확인 누르면 로그아웃 되고 로그인 페이지 이동
+
+    2. 공지사항 화면
+        - 공지사항 누르면 내용 나옴
+
+# 구성
+## lib폴더
+    - components 패키지 : page에 들어가는 문자입력, 로고, 메뉴 카드, 버튼 같은 구성요소들
+    - model 패키지 : menu, patient 같은 종류가 있는 객체들을 생성 및 저장하고 있는 곳 
+         * DB에 저장되어야 하는 것들이라고 생각하면 됨
+    - pages 패키지 : 각 페이지 출력을 담당하는 곳
+    - costants.dart : 많이 사용하는 공백, 색을 저장
+    - route.dart : 각 page의 경로를 저장
+    - theme.dart : 프로젝트에서 사용하는 글씨체, 앱 바 양식 
+    - pubspec.yaml : 사용할 라이브러리 
+
+

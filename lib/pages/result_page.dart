@@ -50,7 +50,6 @@ class ResultPage extends StatelessWidget {
                     child: Image.network('http://223.194.45.74:5000/show/' +
                         "${home.res + '.gif'}"),
                   ),
-                ),
 
               Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
                 Row(
