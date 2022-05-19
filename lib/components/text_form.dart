@@ -41,23 +41,6 @@ class TextForm extends StatelessWidget {
               borderSide: BorderSide(color: Colors.blue),
             ),
           ),
-          /*enabledBorder: OutlineInputBorder(
-              //기본 TextFormField 디자인
-              borderRadius: BorderRadius.circular(20),
-            ),
-            focusedBorder: OutlineInputBorder(
-              //터치시 TextFormField 디자인
-              borderRadius: BorderRadius.circular(20),
-            ),
-            errorBorder: OutlineInputBorder(
-              //에러 발생시 TextFormField 디자인
-              borderRadius: BorderRadius.circular(20),
-            ),
-            focusedErrorBorder: OutlineInputBorder(
-              //에러 발생 후 터치 시 TextFormField 디자인
-              borderRadius: BorderRadius.circular(20),
-            ),
-          ),*/
         ),
       ],
     );

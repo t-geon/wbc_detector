@@ -48,7 +48,6 @@ class PasswordChangePage extends StatelessWidget {
                   text: "취소",
                   press: () {
                     Navigator.pop(context);
-                    //Navigator.pushNamed(context, "/id"); //취소 버튼 누르면 계정 정보화면 이동
                   },
                 ),
               ],
