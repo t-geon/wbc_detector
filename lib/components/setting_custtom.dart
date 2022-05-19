@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:wbc_detector/model/text_menu.dart';
-import 'package:wbc_detector/pages/login/login_page.dart';
 import '../../components/text_menu_card.dart';
 
 //setting화면의 구성을 만드는 곳
@@ -30,7 +29,6 @@ class SettingCustom extends StatelessWidget {
             itemCount: settingMenuList.length,
           ),
         ),
-        //buildPaddingTextMenuCard("소개", () {}),
       ],
     );
   }

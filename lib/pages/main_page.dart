@@ -36,7 +36,6 @@ class _MainPageState extends State<MainPage> {
           (index) => _buildBottomNavigationBarItem(
             icon: bottom_menu[index].icon,
             label: bottom_menu[index].label,
-            //현재 선택한 인덱스 번호와 bottom_menu의 id값이 같으면 true리턴
             isActive: bottom_menu[index].id == _selectedIndex ? true : false,
           ),
         ),

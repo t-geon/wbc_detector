@@ -16,7 +16,6 @@ class IdPage extends StatelessWidget {
             ),
             onPressed: () => Navigator.pop(context)),
       ),
-      //body: Center(child: Text("id page")),
       body: SingleChildScrollView(
         child: IdPageCusttom(),
       ),

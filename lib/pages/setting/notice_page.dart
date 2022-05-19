@@ -26,11 +26,14 @@ class NoticePage extends StatelessWidget {
           ),
           SliverList(
             //공지사항 리스트 생성
-            delegate: SliverChildListDelegate(List.generate(
+            delegate: SliverChildListDelegate(
+              List.generate(
                 notice.length,
                 (index) => ExtendsTextCard(
-                      item: notice[index],
-                    ))),
+                  item: notice[index],
+                ),
+              ),
+            ),
           ),
         ],
       ),

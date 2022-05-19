@@ -11,7 +11,7 @@ class _ListDetailPageState extends State<ListDetailPage> {
   @override
   Widget build(BuildContext context) {
     //상세 페이지에 쓰일 것들
-    print(pc.select.name);
+    print(pc.select.image);
     return Container(
       child: Scaffold(
         appBar: AppBar(
@@ -40,10 +40,27 @@ class _ListDetailPageState extends State<ListDetailPage> {
               Padding(
                 padding: EdgeInsets.only(left: 0.0),
                 child: Container(
-                  child: Image.network('http://192.168.219.101:5000/show/' +
-                      "${pc.select.image + '.gif'}"), //결과 이미지 가져오기
+                  child: Image.network(
+                      'http://223.194.45.74:5000/show/${pc.select.image}' +
+                          '.gif'),
                 ),
               ),
+
+              Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                Row(
+                  children: [
+                    SizedBox(width: 10),
+                    Text(
+                      "백혈구 측정치: ${pc.select.count}",
+                      textAlign: TextAlign.start,
+                      style: const TextStyle(
+                        fontSize: 15,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ],
+                ),
+              ]),
 
               SizedBox(height: 30),
               Container(

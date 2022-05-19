@@ -20,12 +20,7 @@ class _LoginPageState extends State<LoginPage> {
   final TextEditingController txtId = TextEditingController();
   final TextEditingController txtPassword = TextEditingController();
 
-  bool _isLogin = true; //로그인 수행
   late String _userId; //인증 데이터 보관
-  late String _password; //인증 데이터 보관
-  late String _id; //인증 데이터 보관
-  String _message = ""; //오류 메세지 보관
-
   late Authentication auth;
 
   @override
@@ -120,7 +115,6 @@ class _LoginPageState extends State<LoginPage> {
                   MaterialPageRoute(
                       builder: (BuildContext context) => LoadingPage()),
                   (route) => false);
-              //Navigator.push(context,MaterialPageRoute(builder: (context) => LoadingPage()));
             }
           },
           child: Center(
@@ -174,17 +168,6 @@ class _LoginPageState extends State<LoginPage> {
             child: Column(
               children: [
                 SizedBox(height: xl_gap),
-                /*Text(
-                  'WBC Detector \n 로그인',
-                  textAlign: TextAlign.center,
-                  style: const TextStyle(
-                    fontSize: 30,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.indigo,
-                  ),
-                ),
-                 */
-
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [

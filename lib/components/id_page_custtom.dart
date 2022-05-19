@@ -1,7 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:wbc_detector/model/text_menu.dart';
-import 'package:wbc_detector/pages/home_page.dart';
 import 'package:wbc_detector/pages/login/login_page.dart';
 import 'package:wbc_detector/share/authentication.dart';
 import '../../components/text_menu_card.dart';

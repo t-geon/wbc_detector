@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:wbc_detector/pages/main_page.dart';
-
 import '../constants.dart';
 
 import 'home_page.dart' as home;
@@ -26,7 +25,6 @@ class ResultPage extends StatelessWidget {
           onPressed: () => Navigator.popAndPushNamed(context, '/main'),
         ),
       ),
-      //body: Center(child: Text("result page")),
       body: GestureDetector(
         onTap: () {
           FocusScope.of(context).unfocus();
@@ -43,20 +41,32 @@ class ResultPage extends StatelessWidget {
                   color: Colors.indigo,
                 ),
               ),
-              SizedBox(height: 20),
 
-              //여기서 변수로 해당 response값 저장해두기 ->나중에 image에다가 넣어서 데이터베이스에 저장
               if (home.res != "")
                 //home.res는 gif파일 이름
                 Padding(
                   padding: EdgeInsets.only(left: 0.0),
                   child: Container(
-                    //여기서 서버컴 주소로 바꿔야함
-                    child: Image.network('http://192.168.219.101:5000/show/' +
+                    child: Image.network('http://223.194.45.74:5000/show/' +
                         "${home.res + '.gif'}"),
-                    //Image.network('http://223.194.45.74:5000/show/' + 1.jpg"), //결과 이미지 가져오기오기
                   ),
                 ),
+
+              Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                Row(
+                  children: [
+                    SizedBox(width: 10),
+                    Text(
+                      "백혈구 측정치: ${home.count}",
+                      textAlign: TextAlign.start,
+                      style: const TextStyle(
+                        fontSize: 15,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ],
+                ),
+              ]),
 
               SizedBox(height: 30),
               Container(
@@ -107,7 +117,6 @@ class ResultPage extends StatelessWidget {
                           ),
                         ),
                       ),
-
                       SizedBox(height: 15),
                       Row(
                         children: [
@@ -137,9 +146,7 @@ class ResultPage extends StatelessWidget {
                           ),
                         ),
                       ),
-                      //TextForm("검사 내용"),
                       SizedBox(height: 15),
-
                       Row(
                         children: [
                           SizedBox(width: 10),
@@ -168,7 +175,6 @@ class ResultPage extends StatelessWidget {
                           ),
                         ),
                       ),
-
                       SizedBox(height: 30),
                       Container(
                         alignment: Alignment.center,
@@ -205,6 +211,7 @@ class ResultPage extends StatelessWidget {
                                                       "patient_details");
                                           userCollectionReference.add({
                                             "content": content.text,
+                                            "count": home.count,
                                             "name": name.text,
                                             "time": time.text,
                                             "image": home.res
@@ -216,7 +223,6 @@ class ResultPage extends StatelessWidget {
                                                       (BuildContext context) =>
                                                           MainPage()),
                                               (route) => false);
-                                          //Navigator.pushNamed(context, "/main");
                                         },
                                         child: Text('확인'),
                                       ),
@@ -228,45 +234,6 @@ class ResultPage extends StatelessWidget {
                           },
                         ),
                       ),
-/*
-                      DefaultButton(
-                        //default_button.dart에 정의한 함수 이용해 찾기 버튼 생성
-                        text: "등록하기",
-
-                        press: () {
-                          if (_formKey.currentState!.validate()) {
-                            showDialog(
-                              context: context,
-                              barrierDismissible: false,
-                              builder: (BuildContext ctx) {
-                                return AlertDialog(
-                                  title: Text('검진 내용 등록.'), //제목
-                                  content: Text('검진 내용 등록을 성공적으로 완료했습니다.'), //내용
-                                  actions: [
-                                    FlatButton(
-                                      onPressed: () {
-                                        final userCollectionReference =
-                                            FirebaseFirestore.instance
-                                                .collection("patient_details");
-                                        //.doc();
-                                        userCollectionReference.add({
-                                          "content": content.text,
-                                          "name": name.text,
-                                          "time": time.text,
-                                          "image": home.res
-                                        });
-                                        Navigator.pushNamed(context, "/main");
-                                      },
-                                      child: Text('확인'),
-                                    ),
-                                  ],
-                                );
-                              },
-                            );
-                          }
-                        },
-                      ),
-                      */
                     ],
                   ),
                 ),

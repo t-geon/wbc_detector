@@ -14,7 +14,6 @@ class SignUpPage extends StatefulWidget {
 }
 
 class _SignUpPageState extends State<SignUpPage> {
-//class SignUpPage extends StatelessWidget {
   static String routeName = "/sign";
   final _formKey = GlobalKey<FormState>();
   final _idFormKey = GlobalKey<FormState>();
@@ -22,10 +21,6 @@ class _SignUpPageState extends State<SignUpPage> {
 
   late String _userId; //인증 데이터 보관
   late String _userPassword;
-
-  String _message = "";
-  String _userName = "";
-  String _userPhoneNumber = "";
 
   @override
   void initState() {
