@@ -47,6 +47,7 @@ class _ListDetailPageState extends State<ListDetailPage> {
               ),
 
               Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                SizedBox(height: 30),
                 Row(
                   children: [
                     SizedBox(width: 10),
