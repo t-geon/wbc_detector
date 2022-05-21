@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:wbc_detector/constants.dart';
 import 'package:wbc_detector/pages/load.dart';
 
-String res = "";
-String count = "";
+String res = "input1";
+String count = "10";
 
 class HomePage extends StatelessWidget {
   static String routeName = "/home";
