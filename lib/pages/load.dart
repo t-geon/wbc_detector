@@ -7,7 +7,6 @@ import 'home_page.dart' as home;
 
 Future<void> loadImage() async {
   home.res = "";
-
   FilePickerResult? result = await FilePicker.platform.pickFiles();
 
   if (result == null) {
@@ -49,6 +48,15 @@ Future<void> loadImage() async {
       print(response.data.toString() + " hallo!");
       home.res = body['name'];
       home.count = body['cnt'];
+      if (body['level'] == '0') {
+        home.level = "호중구 감소증 의심";
+      } else if (body['level'] == '1') {
+        home.level = "정상 범위";
+      } else if (body['level'] == '2') {
+        home.level = "백혈병 의심";
+      } else {
+        home.level = "검진 오류";
+      }
     } else {
       print("error: in loadImage method!");
     }
@@ -72,6 +80,11 @@ class _LoadPageState extends State<LoadPage> {
       appBar: AppBar(
         automaticallyImplyLeading: false,
         title: Text("WBC Detector with DVS"),
+        leading: IconButton(
+            icon: Icon(
+              Icons.arrow_back,
+            ),
+            onPressed: () => Navigator.pop(context)),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -79,16 +92,6 @@ class _LoadPageState extends State<LoadPage> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             SizedBox(height: 150),
-            Text(
-              '모델이 동작하고 있습니다.',
-              textAlign: TextAlign.center,
-              style: const TextStyle(
-                fontSize: 25,
-                fontWeight: FontWeight.bold,
-                color: Colors.indigo,
-              ),
-            ),
-            SizedBox(height: 50),
             FutureBuilder(
               future: loadImage(),
               initialData: "",
@@ -96,6 +99,15 @@ class _LoadPageState extends State<LoadPage> {
                 if (home.res == "") {
                   return Column(
                     children: [
+                      Text(
+                        '모델이 동작하고 있습니다.',
+                        textAlign: TextAlign.center,
+                        style: const TextStyle(
+                          fontSize: 25,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.indigo,
+                        ),
+                      ),
                       SizedBox(height: 50),
                       Center(
                         child: CircularProgressIndicator(),

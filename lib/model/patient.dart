@@ -8,15 +8,17 @@ class PatientDetail {
   late String _content;
   late String _time;
   late String _count;
+  late String _level;
 
   PatientDetail(this.id, this._image, this._name, this._content, this._time,
-      this._count); //생성자
+      this._count, this._level); //생성자
 
   String get image => _image;
   String get name => _name;
   String get content => _content;
   String get time => _time;
   String get count => _count;
+  String get level => _level;
 
   PatientDetail.fromMap(dynamic obj) {
     //동적 객체 가져와서 Patient로 변환하는 생성자
@@ -26,6 +28,7 @@ class PatientDetail {
     this._content = obj['content'];
     this._time = obj['time'];
     this._count = obj['count'];
+    this._level = obj['level'];
   }
 
   Map<String, dynamic> toMap() {
@@ -39,6 +42,7 @@ class PatientDetail {
     map['content'] = _content;
     map['time'] = _time;
     map['count'] = _count;
+    map['level'] = _level;
 
     return map;
   }

@@ -66,6 +66,36 @@ class ResultPage extends StatelessWidget {
                     ),
                   ],
                 ),
+                SizedBox(height: 30),
+                Row(
+                  children: [
+                    SizedBox(width: 10),
+                    Text(
+                      "AI 검진결과: ",
+                      textAlign: TextAlign.start,
+                      style: const TextStyle(
+                          fontSize: 15, fontWeight: FontWeight.bold),
+                    ),
+                    if (home.level == '호중구 감소증 의심' || home.level == '백혈병 의심')
+                      Text(
+                        "${home.level}",
+                        textAlign: TextAlign.start,
+                        style: const TextStyle(
+                            fontSize: 15,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.red),
+                      ),
+                    if (home.level == '정상 범위' || home.level == '검진 오류')
+                      Text(
+                        "${home.level}",
+                        textAlign: TextAlign.start,
+                        style: const TextStyle(
+                          fontSize: 15,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                  ],
+                ),
               ]),
 
               SizedBox(height: 30),
@@ -214,7 +244,8 @@ class ResultPage extends StatelessWidget {
                                             "count": home.count,
                                             "name": name.text,
                                             "time": time.text,
-                                            "image": home.res
+                                            "image": home.res,
+                                            "level": home.level
                                           });
                                           Navigator.pushAndRemoveUntil(
                                               context,
