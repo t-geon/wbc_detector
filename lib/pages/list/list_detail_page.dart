@@ -61,6 +61,38 @@ class _ListDetailPageState extends State<ListDetailPage> {
                     ),
                   ],
                 ),
+                SizedBox(height: 30),
+                Row(
+                  children: [
+                    SizedBox(width: 10),
+                    Text(
+                      "AI 검진결과: ",
+                      textAlign: TextAlign.start,
+                      style: const TextStyle(
+                          fontSize: 15, fontWeight: FontWeight.bold),
+                    ),
+                    if (pc.select.level == '호중구 감소증 의심' ||
+                        pc.select.level == '백혈병 의심')
+                      Text(
+                        "${pc.select.level}",
+                        textAlign: TextAlign.start,
+                        style: const TextStyle(
+                            fontSize: 15,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.red),
+                      ),
+                    if (pc.select.level == '정상 범위' ||
+                        pc.select.level == '검진 오류')
+                      Text(
+                        "${pc.select.level}",
+                        textAlign: TextAlign.start,
+                        style: const TextStyle(
+                          fontSize: 15,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                  ],
+                ),
               ]),
 
               SizedBox(height: 30),

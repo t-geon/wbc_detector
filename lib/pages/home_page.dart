@@ -4,6 +4,7 @@ import 'package:wbc_detector/pages/load.dart';
 
 String res = "input1";
 String count = "10";
+String level = "정상 범위";
 
 class HomePage extends StatelessWidget {
   static String routeName = "/home";
@@ -46,11 +47,15 @@ class HomePage extends StatelessWidget {
                 padding: EdgeInsets.all(16),
               ),
               onPressed: () async {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => LoadPage()));
+                /*
                 Navigator.pushAndRemoveUntil(
                     context,
                     MaterialPageRoute(
                         builder: (BuildContext context) => LoadPage()),
                     (route) => false);
+                 */
               },
               child: Text(
                 "등록하러 가기",

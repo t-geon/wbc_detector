@@ -1,10 +1,28 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:wbc_detector/constants.dart';
 import 'login/login_page.dart';
 
-class SplashPage extends StatelessWidget {
+class SplashPage extends StatefulWidget {
   static String routeName = "/splash";
+  @override
+  _SplashPageState createState() => _SplashPageState();
+}
+
+class _SplashPageState extends State<SplashPage> {
+  @override
+  void initState() {
+    super.initState();
+    Timer(
+      Duration(seconds: 2),
+      () => Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => LoginPage()),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -14,14 +32,13 @@ class SplashPage extends StatelessWidget {
           child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          SizedBox(height: xl_gap),
-          SizedBox(height: xl_gap),
           Center(
               child: SvgPicture.asset(
             "assets/icons/logo.svg",
             color: Colors.white,
             width: 130,
           )),
+          SizedBox(height: l_gap),
           SizedBox(height: l_gap),
           Center(
             child: Text("WBC Detector",
@@ -37,27 +54,6 @@ class SplashPage extends StatelessWidget {
                     fontSize: 25.0,
                     fontWeight: FontWeight.bold,
                     color: Colors.white)),
-          ),
-          SizedBox(height: xl_gap),
-          Expanded(
-            //터치 해서 넘어가는 글자 삽입
-            flex: 1,
-            child: Padding(
-              padding: EdgeInsets.all(24),
-              child: TextButton(
-                child: Text(
-                  "진행하려면 터치해주세요.",
-                  style: TextStyle(fontSize: 20),
-                ),
-                onPressed: () {
-                  Navigator.pushAndRemoveUntil(
-                      context,
-                      MaterialPageRoute(
-                          builder: (BuildContext context) => LoginPage()),
-                      (route) => false);
-                },
-              ),
-            ),
           ),
         ],
       )),
