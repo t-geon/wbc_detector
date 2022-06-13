@@ -47,8 +47,9 @@ class ResultPage extends StatelessWidget {
                 Padding(
                   padding: EdgeInsets.only(left: 0.0),
                   child: Container(
-                    child: Image.network('http://223.194.45.74:5000/show/' +
+                    child: Image.network('http://<IP주소>/show/' +
                         "${home.res + '.gif'}"),
+                    //ip주소로 
                   ),
 
               Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
