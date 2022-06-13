@@ -41,8 +41,9 @@ class _ListDetailPageState extends State<ListDetailPage> {
                 padding: EdgeInsets.only(left: 0.0),
                 child: Container(
                   child: Image.network(
-                      'http://223.194.45.74:5000/show/${pc.select.image}' +
+                      'http://<ip주소>/show/${pc.select.image}' +
                           '.gif'),
+                  //ip주소로 
                 ),
               ),
 
